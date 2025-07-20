@@ -1,0 +1,321 @@
+/* Cấu trúc chung của trang */
+.double-room-page {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+  }
+  
+  .header-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 40px;
+  }
+  
+  /* Các button chọn loại phòng */
+  .room-type-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .room-type-buttons button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .room-type-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .room-type-buttons button.active {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Danh sách phòng */
+  .room-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .room-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .room-card img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    height: 200px;
+  }
+  
+  .room-card h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 15px;
+  }
+  
+  .room-card p {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    color: #28a745;
+    margin-top: 10px;
+  }
+  
+  .room-card button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .room-card button:hover {
+    background-color: #218838;
+  }
+  
+  /* Modal xác nhận đặt phòng */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-title {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .close-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+  }
+  
+  .modal-body {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .selected-rooms {
+    margin-bottom: 20px;
+  }
+  
+  .room-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .room-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 8px;
+  }
+  
+  .room-details {
+    flex-grow: 1;
+  }
+  
+  .room-info h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .room-info .quantity-control {
+    margin-top: 10px;
+  }
+  
+  .room-info .quantity-control input {
+    width: 60px;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .delete-room-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-room-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* Thông tin khách hàng và thanh toán */
+  .customer-form {
+    margin-bottom: 20px;
+  }
+  
+  .customer-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  .payment-method select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  
+  .total-amount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .confirm-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Xác nhận đặt phòng */
+  .booking-confirmation {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #28a745;
+    padding: 20px;
+    background-color: #d4edda;
+    border-radius: 5px;
+  }
+  
+  .booking-confirmation.hidden {
+    display: none;
+  }
+  
+  /* Modal thông tin phòng */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .modal-title {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .close-btn {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    background: none;
+    border: none;
+  }
+  .room-image {
+    max-width: 200px; /* Adjust the maximum width to fit the container */
+    height: auto;    /* Maintain aspect ratio */
+    max-height: 200px; /* Set a max height for consistency */
+    object-fit: cover; /* Ensures images fill the space without distortion */
+    border-radius: 8px; /* Adds rounded corners for better aesthetics */
+    margin: 10px 0; /* Adds some spacing around the images */
+  }
+  

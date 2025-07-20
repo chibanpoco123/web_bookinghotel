@@ -1,0 +1,102 @@
+/* BookingPage.css */
+
+.booking-page {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.header-title {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.booked-rooms-list {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phòng xuống dòng khi không đủ không gian */
+  gap: 20px; /* Khoảng cách giữa các phòng */
+  justify-content: flex-start; /* Căn lề trái cho các phòng */
+}
+
+.room-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: calc(25% - 20px); /* 4 phòng trên mỗi hàng, với khoảng cách 20px */
+  box-sizing: border-box; /* Đảm bảo tính toán chiều rộng bao gồm cả padding và border */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.room-card:hover {
+  transform: scale(1.05); /* Hiệu ứng hover khi di chuột vào phòng */
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px; /* Chiều cao cố định cho ảnh */
+  object-fit: cover;
+}
+
+.room-card h2 {
+  font-size: 1.2em;
+  margin: 10px;
+  text-align: center;
+  color: #444;
+}
+
+.room-card p {
+  font-size: 1em;
+  margin: 5px 10px;
+  text-align: center;
+  color: #666;
+}
+
+.price {
+  color: #007BFF;
+  font-weight: bold;
+}
+
+.room-card .quantity {
+  font-weight: bold;
+  color: #333;
+}
+
+@media (max-width: 1200px) {
+  .room-card {
+    width: calc(33.33% - 20px); /* 3 phòng mỗi hàng trên màn hình tablet */
+  }
+}
+
+@media (max-width: 900px) {
+  .room-card {
+    width: calc(50% - 20px); /* 2 phòng mỗi hàng trên màn hình nhỏ */
+  }
+}
+
+@media (max-width: 600px) {
+  .room-card {
+    width: 100%; /* 1 phòng mỗi hàng trên màn hình rất nhỏ */
+  }
+}
+
+.booked-rooms-list p {
+  font-size: 1.1em;
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+}

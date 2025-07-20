@@ -1,0 +1,296 @@
+/* AdminDashboard.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+  
+  .admin-dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .admin-sidebar {
+    width: 250px;
+    background-color: #2d2d44;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh; /* Đảm bảo sidebar chiếm toàn bộ chiều cao */
+    position: fixed; /* Đảm bảo sidebar không cuộn */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Cho phép cuộn nếu có nội dung dài */
+  }
+  
+  .admin-main {
+    margin-left: 250px; /* Đảm bảo phần nội dung chính không bị che khuất bởi sidebar */
+    padding: 20px;
+    background-color: #fff;
+    height: 100vh;
+    overflow-y: auto; /* Cho phép cuộn dọc phần nội dung */
+  }
+  
+  .admin-sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+  }
+  .admin-sidebar button {
+    margin-top: 45px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .admin-sidebar button:hover {
+    background-color: #c9302c;
+  }
+  
+  .admin-main {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .admin-main h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #555;
+  }
+
+
+  
+  section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  section ul li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  section ul li p {
+    margin: 5px 0;
+  }
+  
+  section ul li button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  section ul li button:hover {
+    background-color: #0056b3;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  form button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  form button:hover {
+    background-color: #218838;
+  }
+  
+  /* Phần thông tin phòng */
+/* Phần thông tin phòng */
+.room-management ul {
+  list-style: none;
+  padding: 0;
+}
+
+.room-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+}
+
+.room-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Để thông tin phòng chiếm phần còn lại */
+}
+
+
+
+.room-details {
+  flex: 1;
+}
+
+.room-details p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 12px;
+  font-weight: bold; /* In đậm thông tin */
+}
+
+.room-details p:first-child {
+  color: #333; /* Làm nổi bật thông tin chính */
+}
+
+.room-details p:last-child {
+  color: #888; /* Màu nhạt cho thông tin phụ */
+}
+
+button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  text-transform: uppercase; /* Chữ in hoa để trông chuyên nghiệp */
+}
+
+button:hover {
+  background-color: #c9302c;
+}
+
+button:focus {
+  outline: none;
+}
+
+.room-info {
+  display: flex;
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  margin-bottom: 30px;
+}
+
+.room-info .room-img {
+  flex: 0 0 15%; /* Chiếm 40% chiều rộng, không thay đổi khi màn hình nhỏ */
+  padding-right: 20px; /* Khoảng cách giữa ảnh và thông tin */
+}
+
+.room-info .room-details {
+  flex: 1; /* Phần còn lại chiếm 60% chiều rộng */
+}
+
+.room-info .room-img img {
+  width: 100%; /* Chiều rộng ảnh chiếm 100% không gian phần tử chứa */
+  height: auto; /* Giữ tỷ lệ ảnh */
+  border-radius: 5px; /* Bo tròn góc ảnh */
+}
+
+.room-info .room-details h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.room-info .room-details p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.room-info .room-details .price {
+  font-size: 1.2rem;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.room-info .room-details button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.room-info .room-details button:hover {
+  background-color: #218838;
+}
+.booking-list {
+  padding: 20px;
+}
+
+.booking-item {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.booking-item p {
+  margin: 4px 0;
+}
+
+.booking-item button {
+  margin-top: 10px;
+  background-color: #d9534f;
+  color: white;
+}
+
+.booking-item button:hover {
+  background-color: #c9302c;
+}

@@ -1,0 +1,104 @@
+/* General Styles for SearchForm */
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    background-color: rgb(107, 199, 241);
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(50px);
+  }
+  
+  /* Inputs */
+  .search-form input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    min-width: 150px;
+  }
+  
+  .search-form input:hover {
+    border-color: #003580;
+  }
+  
+  /* Search Button */
+  .search-form button {
+    background-color: #003580;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    font-size: 14px;
+    width: 100%; 
+    max-width: 150px;
+    margin-top: 25px;
+  }
+  
+  .search-form button:hover {
+    background-color: #005bb5;
+    transform: scale(1.05);
+  }
+  
+  /* Guests & Room Input Flex Container */
+  .guests-room-container {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .input-container {
+    flex: 1;
+    position: relative;
+  }
+  
+  .input-container label {
+    font-size: 12px;
+    color: #003580;
+    margin-bottom: 5px;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding-right: 40px; /* Space for +/- buttons */
+  }
+  
+  /* Date Picker */
+  .date-picker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    width: 200px;
+  }
+  
+  .date-picker-container label {
+    font-size: 12px;
+    color: #003580;
+  }
+  
+  .date-picker-container .form-control {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .date-picker-container .form-control:hover {
+    border-color: #003580;
+  }
+  

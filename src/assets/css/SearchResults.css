@@ -1,0 +1,137 @@
+.search-results {
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 22%;
+}
+
+.filter label {
+  font-size: 14px;
+  color: #333;
+}
+
+.filter input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.results-info {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+  width: 40%;
+  margin-right: 20px;
+}
+
+.product-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.room-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+}
+
+.product-info p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #777;
+  font-family: 'Arial', sans-serif;
+}
+
+.product-info .price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f15c5c;
+}
+
+.product-info .rating {
+  font-size: 14px;
+  color: #f39c12;
+  display: flex;
+  align-items: center;
+}
+
+.product-info .rating i {
+  margin-right: 5px;
+}
+
+.info-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.info-btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,287 @@
+/* Căn chỉnh tổng thể */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.homepage {
+  padding: 20px;
+}
+
+
+
+/* Banner */
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Search Container */
+.search-container {  
+  background-color: #f8f9fa;  
+  border-radius: 8px;  
+  padding: 20px;  
+  margin-bottom: 20px;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+}  
+
+.search-container h2 {  
+  font-size: 24px;  
+  margin-bottom: 15px;  
+  color: #333;  
+  text-align: left;  
+}  
+
+.result-container {  
+  display: flex;  
+  flex-wrap: wrap;  
+}  
+
+.result-card:hover {  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
+}  
+
+.result-card {  
+  display: flex;  
+  align-items: center;  
+  background-color: #fff;  
+  border: 1px solid #eee;  
+  border-radius: 5px;  
+  margin: 10px;  
+  width: calc(30% - 20px);  
+  text-align: left;  
+  transition: box-shadow 0.3s;  
+}  
+
+.result-img {  
+  width: 150px;  
+  height: 150px;  
+  object-fit: cover;  
+  border-top-left-radius: 5px;  
+  border-top-right-radius: 5px;  
+  margin-right: 10px;  
+  margin-left: 10px; 
+}  
+
+.result-details {  
+  padding: 10px;  
+  flex: 1;  
+}
+
+.categories {
+  margin: 20px 0;
+}
+
+.category-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  width: 48%;
+  text-align: center;
+}
+
+.category img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.category h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.category button {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.category button:hover {
+  background-color: #218838;
+}
+
+/* Phòng khách sạn */
+.hotel-list {
+  margin: 20px 0;
+}
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.hotel-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hotel-item img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.hotel-item h3 {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hotel-item p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.hotel-item .price {
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  color: #0a58ca;
+  margin: 10px 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px 0;
+}
+
+.rating-info {
+  margin-left: 10px;
+}
+
+.hotel-item button {
+  margin-top: 15px;
+  background-color: #0a58ca;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+.hotel-item button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/* Modal Styles */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.product-info img {
+  max-width: 200px;
+  max-height: 150px;
+  margin-right: 20px;
+}
+
+.product-details {
+  flex: 1;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity button {
+  padding: 5px 10px;
+  margin: 0 10px;
+}
+
+.total-price {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Customer Information Inputs */
+.customer-info input,
+.customer-info select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Button Styles */
+button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+

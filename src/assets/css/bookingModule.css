@@ -1,0 +1,214 @@
+/* Modal Popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    max-width: 90%;
+    padding: 20px;
+    animation: slideDown 0.3s ease-out;
+    margin: 0 auto; /* Ensure center alignment */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.selected-rooms .room-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.room-imagegg {
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+
+    width: 25%;
+}
+.room-detailsaa h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.quantity-control input {
+    width: 60px;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.delete-room-btn {
+    background: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-room-btn:hover {
+    background: #ff7875;
+}
+
+.customer-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.payment-method {
+    margin-top: 20px;
+}
+
+.payment-method h3 {
+    margin-bottom: 10px;
+}
+
+.payment-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #007BFF;
+    background-color: #fff;
+    color: #34495e;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+}
+
+.payment-select:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+/* Add custom dropdown arrow */
+.payment-select::after {
+    content: '\25BC'; /* Unicode for the down arrow */
+    font-size: 18px;
+    color: #007BFF;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.payment-select option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.confirm-btn:hover {
+    background: #45a049;
+}
+
+.total-amount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Keyframes */
+@keyframes slideDown {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Booking Confirmation Style */
+.booking-confirmation {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.booking-confirmation h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.booking-confirmation p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+/* Hidden Booking Confirmation */
+.booking-confirmation.hidden {
+    opacity: 0;
+}

@@ -1,0 +1,225 @@
+/* Cấu trúc chung của trang */
+.room-detail-page {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Màu nền sáng, nhẹ nhàng */
+}
+
+/* Phần tiêu đề */
+.room-detail-header {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #ffffff;  /* Màu nền sáng cho tiêu đề */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Thêm bóng đổ nhẹ */
+}
+
+.room-detail-header h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  color: #3c5c68;  /* Màu xanh lam cho tiêu đề */
+}
+
+.room-location {
+  font-size: 1.2rem;
+  color: #888;  /* Màu xám nhạt cho vị trí */
+}
+
+/* Phần thân của trang */
+.room-detail-body {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 30px;  /* Khoảng cách giữa các phần */
+}
+
+/* Phần ảnh phòng */
+.room-image-gallery {
+  width: 55%;
+}
+
+.main-room-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.image-thumbnails {
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.thumbnail-image {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-image:hover {
+  transform: scale(1.1);  /* Hiệu ứng phóng to khi hover */
+}
+
+/* Thông tin phòng */
+.room-infoaa {
+  width: 45%;
+}
+
+.room-infoaa h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #3c5c68;
+}
+
+.room-infoaa p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #555;  /* Màu chữ xám đậm */
+}
+
+/* Tiện ích và quy định phòng */
+.room-amenities, .room-rules {
+  margin-top: 20px;
+}
+
+.room-amenities h3, .room-rules h3 {
+  font-size: 1.7rem;
+  margin-bottom: 15px;
+  color: #1f78d1;  /* Màu xanh dương cho tiêu đề */
+}
+
+.amenity-icons, .rule-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Các mục tiện ích và quy định */
+.amenity-item, .rule-item {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 200px;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.amenity-item p, .rule-item p {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #666;
+}
+.amenity-item{
+  cursor: pointer;
+}
+.hotel-item{
+cursor: pointer;
+}
+.amenity-item:hover, .rule-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);  /* Hiệu ứng nâng cao và đổ bóng */
+}
+
+/* Đặt phòng */
+.room-booking {
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+}
+
+.book-now-button {
+  font-size: 1.8rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.book-now-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);  /* Hiệu ứng phóng to khi hover */
+}
+
+/* Đánh giá */
+.room-review {
+  margin-top: 50px;
+}
+
+.room-review h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #3c5c68;
+}
+
+.review-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  padding: 20px;
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-review {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.add-review textarea {
+  width: 100%;
+  height: 120px;
+  padding: 15px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.add-review textarea:focus {
+  border-color: #28a745;  /* Màu xanh lá khi focus */
+  outline: none;
+}
+
+.add-review button {
+  padding: 12px 25px;
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-review button:hover {
+  background-color: #218838;
+  transform: scale(1.05);  /* Hiệu ứng phóng to khi hover */
+}
+
+/* Quay lại trang danh sách phòng */
+.room-info {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}

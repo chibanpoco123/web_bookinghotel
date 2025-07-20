@@ -1,0 +1,225 @@
+/* Đặt kiểu chung cho form đăng nhập */
+.login-form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form .form-group + .form-group {
+  margin-top: 10px;
+}
+
+/* Container cho liên kết đăng ký */
+.register-link-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-link {
+  color: #6200ea; /* Màu tím cho liên kết */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+/* Container cho nút social login */
+.social-login-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.social-login-container p {
+  margin-bottom: 10px;
+  color: #b3b3b3;
+}
+
+.btn-google,
+.btn-facebook {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-google {
+  background-color: #ffffff;
+  color: #444;
+  border: 1px solid #ddd;
+}
+
+.btn-google:hover {
+  background-color: #f5f5f5;
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+  color: #ffffff;
+}
+
+.btn-facebook:hover {
+  background-color: #2d4373;
+}
+
+.btn-google img,
+.btn-facebook img {
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.checkbox-group label {
+  margin-left: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* g */
+/* Container bao quanh toàn bộ phần header */
+.full-page-header {
+  height: 100vh; /* Chiều cao full màn hình */
+  width: 1440px; /* Chiều rộng full màn hình */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Header ở trên, nội dung bên dưới */
+  align-items: center;
+  background-color: #f0f0f0; /* Màu nền toàn màn hình */
+  box-sizing: border-box;
+}
+
+/* Phần header bên trong */
+.custom-header {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #007bff; /* Màu nền header */
+  color: white;
+  font-size: 1.5rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ */
+}
+
+/* Logo và tên thương hiệu */
+.custom-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-home-icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.custom-brand-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Form đăng nhập */
+.login-form-container {
+  max-width: 400px;
+  margin-top: 20px; /* Khoảng cách giữa header và form */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Căn giữa nội dung khi màn hình cao hơn form */
+.full-page-header .login-form-container {
+  margin: auto; /* Đẩy form vào giữa khi nội dung ngắn */
+}
+
+
+
+
+

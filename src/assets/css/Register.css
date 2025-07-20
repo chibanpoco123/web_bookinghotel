@@ -1,0 +1,260 @@
+/* Container chính cho form đăng ký */
+.register-form-container {
+  max-width: 420px;
+  margin: 50px auto;
+  padding: 25px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: box-shadow 0.3s ease;
+}
+
+.register-form-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Tiêu đề form */
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Phần tử nhóm form */
+.form-group {
+  margin-bottom: 15px; /* Khoảng cách giữa các nhóm input vừa đủ */
+}
+
+/* Nhãn input */
+label {
+  display: block;
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 6px; /* Khoảng cách ngắn hơn giữa label và input */
+}
+
+/* Input chung */
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px; /* Padding vừa phải */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background-color: #f1f1f1;
+}
+
+/* Nút Đăng ký */
+.register-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Hiển thị lỗi */
+.error-message {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+/* Tin nhắn thành công */
+.success-message {
+  color: #28a745;
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Căn chỉnh form */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form .form-group + .form-group {
+  margin-top: 10px; /* Khoảng cách giữa các input tối ưu */
+}
+
+/* Container cho liên kết đăng nhập */
+.login-link-container {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-link {
+  color: #800080;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.login-link:hover {
+  color: #4B0082;
+  transform: scale(1.1);
+}
+
+/* Hiệu ứng cho icon hiển thị mật khẩu */
+.password-container {
+  position: relative;
+}
+
+.password-container .icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.password-container .icon:hover {
+  color: #555;
+}
+
+.login-link-container {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 16px;
+  display: flex; /* Hiển thị chữ và nút trên cùng một dòng */
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Khoảng cách giữa chữ và nút */
+}
+
+.text-static {
+  color: #333; /* Màu chữ tĩnh, dễ đọc */
+  font-weight: 500;
+}
+
+.link {
+  color: white;
+  background-color: #007bff; /* Màu xanh đậm */
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.link:hover {
+  background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #003580;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-icon {
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+  background-color: transparent;
+}
+
+.header-icon:hover {
+  background-color: white;
+  color: #003580;
+}
+
+
+/* Header */
+.custom-header {
+  background-color: #BDD8FF; /* Màu nền header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #003366; /* Màu chữ */
+  width: 1440px;
+  height: 80px;
+}
+
+/* Logo Container */
+.custom-logo-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 50px;
+}
+
+.custom-home-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.custom-brand-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Flag Container */
+.flag-container {
+  display: flex;
+  align-items: center;
+}
+
+.vn-flag {
+  width: 30px; /* Adjust the size of the flag */
+  height: 20px;
+}

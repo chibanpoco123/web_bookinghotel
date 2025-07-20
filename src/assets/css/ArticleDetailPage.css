@@ -1,0 +1,44 @@
+.article-detail {
+  max-width: 800px; /* Giới hạn chiều rộng của trang chi tiết bài viết */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.article-meta {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.article-description p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.article-images {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px; /* Khoảng cách dưới ảnh */
+}
+
+.article-main-image {
+  width: 100%;
+  max-width: 300px; /* Giới hạn kích thước tối đa của ảnh */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.article-content {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.anh {
+  width: 700px; /* Điều chỉnh chiều rộng ảnh theo nhu cầu */
+  height: auto; /* Đảm bảo tỷ lệ khung hình của ảnh không bị thay đổi */
+  display: block; /* Chuyển ảnh thành block để dễ căn giữa */
+  margin-left: auto; /* Tự động căn trái */
+  margin-right: auto; /* Tự động căn phải */
+}

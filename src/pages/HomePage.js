@@ -61,7 +61,7 @@ const user = getCurrentUser();
   const handleRoomDetail = (id) => {
     navigate(`/room/${id}`);
   };
-
+const topRooms = [...rooms].filter(room => typeof room.reviews === 'number').sort((a,b) => b.reviews - a.reviews).slice(0,4)
 const renderStars = (rating) => {
   const safeRating = Number(rating);
 
@@ -195,7 +195,7 @@ const renderStars = (rating) => {
         <div className="hotel-list">
           <h3>Danh sách khách sạn nổi bật</h3>
           <div className="hotel-grid">
-            {rooms.map(room => (
+            {topRooms.map(room => (
               <div
                 className="hotel-item"
                 key={room._id}
@@ -218,7 +218,7 @@ onClick={() => handleRoomDetail(room._id)}
               </div>
             ))}
           </div>
-        </div>
+        </div>  
       </div>
 
       {showModal && selectedRoom && (

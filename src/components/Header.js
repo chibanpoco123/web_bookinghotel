@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { SearchContext } from '../context/SearchContext';
 import SearchForm from '../components/Search/SearchForm';  // Import component SearchForm
 import '../assets/css/Header.css';
+import { checkLogin } from '../util/authUtils';
 const Header = () => {
   const { setSearchResults } = useContext(SearchContext);
   const navigate = useNavigate();
@@ -11,17 +12,18 @@ const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userName, setUserName] = useState('');
 
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (loggedInUser) {
-      setIsLoggedIn(true);
-      setUserName(loggedInUser.name);
-      if (loggedInUser.role === 'admin') {
-        setIsAdmin(true);
-        navigate('/AdminDashboard');
-      }
+useEffect(() => {
+    const { isLoggedIn, userName, isAdmin } = checkLogin();
+
+    setIsLoggedIn(isLoggedIn);
+    setUserName(userName);
+    setIsAdmin(isAdmin);
+
+    if (isAdmin) {
+      navigate('/AdminDashboard');
     }
-  }, [navigate]);
+}, [navigate]);
+
 
   const handleSearch = (searchParams) => {
     const { destination, startDate, endDate, guests, rooms } = searchParams;

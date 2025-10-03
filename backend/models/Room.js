@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Facility = require('./Facility');
 
 const allowedSubTypes = {
   "phòng đơn": ["Standard", "Luxury"],
@@ -13,7 +14,11 @@ const roomSchema = new mongoose.Schema({
   price: String,
   rating: Number,
   reviews: Number,
-  image: String,
+image: {
+  type: [String],
+  default: []
+},
+
   type: {
     type: String,
     enum: ["phòng đơn", "phòng đôi", "phòng gia đình"],
@@ -32,7 +37,12 @@ const roomSchema = new mongoose.Schema({
   isFeatured: {
     type: Boolean,
     default: false
-  }
+  },
+  facilities:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Facility'
+  }]
+
 });
 
 

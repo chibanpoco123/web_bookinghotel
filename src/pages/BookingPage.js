@@ -59,7 +59,7 @@ const BookingPage = () => {
       setBookedRooms(updatedRooms);
       setSuccessMessage("✅ Đã huỷ đặt phòng thành công.");
       setTimeout(() => setSuccessMessage(""), 3000);
-    } catch (error) {
+    } catch (error) { 
       console.error("❌ Lỗi khi huỷ đặt phòng:", error);
       setErrorMessage("Không thể huỷ đặt phòng.");
     }

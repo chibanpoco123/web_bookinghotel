@@ -5,6 +5,10 @@
   const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     const [rooms, setRooms] = useState([]);
+   const [images, setImages] = useState([]);
+    const [imagePreviews, setImagePreviews] = useState([]);
+
+
     const [activeSection, setActiveSection] = useState('users');
     const [editingUser, setEditingUser] = useState(null);
     const [newUser, setNewUser] = useState({
@@ -152,34 +156,58 @@ useEffect(() => {
     }
   };
 
-    const handleAddRoom = async (e) => {
-    e.preventDefault(); // ✅ đặt ở đầu
+ const handleAddRoom = async (e) => {
+  e.preventDefault();
 
-    try {
-      // Gửi request lên server
-      const response = await axios.post('http://localhost:5000/api/rooms', newRoom);
+  try {
+    const formData = new FormData();
 
-      // Cập nhật danh sách phòng từ dữ liệu phản hồi
-      setRooms([...rooms, response.data]);
+    // Append dữ liệu chữ (vẫn giữ nguyên như bạn yêu cầu)
+    formData.append('name', newRoom.name);
+    formData.append('description', newRoom.description);
+    formData.append('price', newRoom.price);
+    formData.append('rating', newRoom.rating);
+    formData.append('reviews', newRoom.reviews);
+    formData.append('type', newRoom.type);
+    formData.append('subType', newRoom.subType);
+    formData.append('address', newRoom.address);
 
-      // Reset form
-      setNewRoom({
-        name: '',
-        description: '',
-        price: '',
-        rating: '',
-        reviews: '',
-        image: '',
-        address: ''
-      });
+    // Append ảnh nếu có (image là mảng File)
+   for (let i = 0; i < newRoom.image.length; i++) {
+  formData.append('image', newRoom.image[i]); // đúng tên 'images' mà backend multer cần
+} 
 
-      alert('Thêm phòng thành công!');
-      setActiveSection('rooms'); // Nếu có phần hiển thị danh sách
-    } catch (error) {
-      console.error('Lỗi khi thêm phòng:', error);
-      alert('Thêm phòng thất bại.');
-    }
-  };
+    // Gửi formData với multipart/form-data
+    const response = await axios.post('http://localhost:5000/api/rooms', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    setRooms([...rooms, response.data]);
+
+    // Reset lại form
+    setNewRoom({
+      name: '',
+      description: '',
+      price: '',
+      rating: '',
+      reviews: '',
+      image: [],
+      type: '',
+      subType: '',
+      address: ''
+    });
+
+    alert('Thêm phòng thành công!');
+    setActiveSection('rooms');
+  } catch (error) {
+    console.error('Lỗi khi thêm phòng:', error);
+    alert('Thêm phòng thất bại.');
+  }
+};
+
+
     const handleEditRoom = (room) => {
       setEditingRoom(room);
       setActiveSection('editRoom');
@@ -207,6 +235,8 @@ useEffect(() => {
       localStorage.removeItem('loggedInUser');
       navigate('/login');
     };
+    const uniqueRoomTypes = Array.from(new Set(rooms.map(room => room.type).filter(Boolean)));
+
 
     return (
       <div className="admin-dashboard">
@@ -363,7 +393,6 @@ useEffect(() => {
               </form>
             </section>
           )}
-
           {activeSection === 'rooms' && (
             <section className="room-management">
               <h2>Quản lý phòng</h2>
@@ -372,8 +401,44 @@ useEffect(() => {
                   <li key={room._id} className="room-item">
                     <div className="room-info">
                       <div className="room-img">
-                        <img src={room.image} alt={room.name} />
-                      </div>
+  {Array.isArray(room.image) && room.image.length > 0 ? (
+    // Nếu là mảng ảnh
+    room.image.map((imgUrl, idx) => (
+      <img
+        key={idx}
+        src={
+          imgUrl.startsWith('/uploads') || imgUrl.startsWith('\\uploads')
+            ? `http://localhost:5000${imgUrl.replace(/\\/g, '/')}`
+            : imgUrl
+        }
+        alt={`${room.name} - Ảnh ${idx + 1}`}
+        style={{ width: '150px', marginRight: '10px' }}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = '/default-image.jpg';
+        }}
+      />
+    ))
+  ) : typeof room.image === 'string' && room.image ? (
+    // Nếu là một chuỗi ảnh
+    <img
+      src={
+        room.image.startsWith('/uploads') || room.image.startsWith('\\uploads')
+          ? `http://localhost:5000${room.image.replace(/\\/g, '/')}`
+          : room.image
+      }
+      alt={room.name}
+      style={{ width: '150px' }}
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.src = '/default-image.jpg';
+      }}
+    />
+  ) : (
+    <p>Không có ảnh</p>
+  )}
+</div>
+
                       <div className="room-details">
                         <h3>{room.name}</h3>
                         <p>{room.description}</p>
@@ -405,7 +470,46 @@ useEffect(() => {
                 <textarea
                   value={newRoom.description}
                   onChange={e => setNewRoom({ ...newRoom, description: e.target.value })}
-                />
+                />                
+                <label>Phân loại phòng:</label>
+<select
+  value={newRoom.type || ''}
+  onChange={e =>
+    setNewRoom({
+      ...newRoom,
+      type: e.target.value,
+      subType: '', // reset subType khi đổi type
+    })
+  }
+>
+  <option value="">-- Chọn phân loại phòng --</option>
+  {Array.from(new Set(rooms.map(room => room.type))).map((type, idx) => (
+    <option key={idx} value={type}>{type}</option>
+  ))}
+</select>
+
+<label>Hạng phòng:</label>
+<select
+  value={newRoom.subType || ''}
+  onChange={e =>
+    setNewRoom({
+      ...newRoom,
+      subType: e.target.value,
+    })
+  }
+  disabled={!newRoom.type} // disable khi chưa chọn loại phòng
+>
+  <option value="">-- Chọn hạng phòng --</option>
+  {rooms
+    .filter(room => room.type === newRoom.type)
+    .map(room => room.subType)
+    .filter((subType, index, arr) => arr.indexOf(subType) === index) // lọc trùng
+    .map((subType, idx) => (
+      <option key={idx} value={subType}>{subType}</option>
+    ))}
+</select>
+
+
                 <label>Giá:</label>
                 <input
                   type="number"
@@ -425,11 +529,14 @@ useEffect(() => {
                   onChange={e => setNewRoom({ ...newRoom, reviews: e.target.value })}
                 />
                 <label>Hình ảnh:</label>
-                <input
-                  type="text"
-                  value={newRoom.image}
-                  onChange={e => setNewRoom({ ...newRoom, image: e.target.value })}
-                />
+ <input
+  type="file"
+  multiple
+  accept="image/*"
+  onChange={(e) =>
+    setNewRoom({ ...newRoom, image: Array.from(e.target.files) })
+  }
+/>
                 <label>Địa chỉ:</label>
                 <input
                   type="text"

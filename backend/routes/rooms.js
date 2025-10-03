@@ -3,11 +3,11 @@ const mongoose = require('mongoose'); // ✅ Thêm dòng này
 const router = express.Router();
 const Room = require('../models/Room');
 const Booking = require('../models/Booking')
-
+const uploads = require('../middleware/uploads')
 //GET lấy chi tiết phòng Id
 router.get('/:id', async (req, res) => {
   try {
-    const room = await Room.findById(req.params.id);
+    const room = await Room.findById(req.params.id).populate('facilities')
     if (!room) {
       return res.status(404).json({ message: 'Không tìm thấy phòng' });
     }
@@ -35,20 +35,40 @@ router.get('/', async (req, res) => {
 
 
 // POST: Thêm phòng mới
-router.post('/', async (req, res) => {
+router.post('/', uploads.array('image', 5), async (req, res) => {
   try {
-    const newRoom = new Room(req.body);
+    console.log('>>> FILES:', req.files);
+    console.log('>>> BODY:', req.body);
+
+    const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
+
+    const newRoom = new Room({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      rating: req.body.rating,
+      reviews: req.body.reviews,
+      type: req.body.type,
+      subType: req.body.subType,
+      address: req.body.address,
+      image: imagePaths, // <- đúng tên trường schema
+      isFeatured: req.body.isFeatured === 'true',
+      facilities: req.body.facilities || [],
+    });
+
     const savedRoom = await newRoom.save();
     res.status(201).json(savedRoom);
-  } catch (err) {
-    res.status(400).json({ message: 'Lỗi khi thêm phòng', error: err.message });
+  } catch (error) {
+    console.error('Lỗi thêm phòng:', error);
+    res.status(500).json({ message: 'Thêm phòng thất bại', error: error.message });
   }
 });
+
 
 // PUT: Cập nhật phòng theo ID
 router.put('/:id', async (req, res) => {
   try {
-    const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('facilities');
     res.json(updatedRoom);
   } catch (err) {
     res.status(400).json({ message: 'Lỗi khi cập nhật phòng', error: err.message });

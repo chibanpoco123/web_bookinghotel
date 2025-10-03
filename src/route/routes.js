@@ -16,6 +16,7 @@ import DoubleRoomPage from '../pages/roomlist/DoubleRoomPage';
 import FamilyRoomPage from '../pages/roomlist/FamilyRoomPage'; 
 import AdminDashboard from '../components/AdminDashboard'; // Import Admin Dashboard
 import SearchResult from '../components/Search/SearchResults'; // Import SearchResult page (đảm bảo đã tạo trang này)
+import PrivateRoutebooking from '../private/PrivateRoutebooking';
 
 function AppRoutes() {
   return (
@@ -23,7 +24,7 @@ function AppRoutes() {
       {/* Các route cơ bản */}
       <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
-      <Route path="/booking" element={<BookingPage />} />
+      <Route path="/booking" element={ <PrivateRoutebooking><BookingPage /></PrivateRoutebooking> } />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/room/:id" element={<RoomDetailPage />} />
       

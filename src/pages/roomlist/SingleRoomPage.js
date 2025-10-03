@@ -14,6 +14,10 @@
       phone: "",
       email : "",
     })
+    
+  const handleRoomDetail = (id) => {
+    navigate(`/room/${id}`);
+  };
     const [paymentMethod,setPaymentMethod] = useState("");
     const [errorMessage,setErrorMessage] = useState("");
     const [isBookingConfirm,setIsBookingConfirm] = useState(false);
@@ -97,7 +101,8 @@
         <div className="room-list">
           {room.length > 0 ? (
             room.map((room, index) => (
-              <div className="room-card" key={index}>
+              <div className="room-card" key={index}
+              onDoubleClick={() => handleRoomDetail(room._id)}>
                 <img src={room.image} alt={room.name} />
                 <h2>{room.name}</h2>
                 <p>{room.address}</p>

@@ -74,7 +74,11 @@ const NewsPage = () => {
                 src={item.image || 'https://via.placeholder.com/300x200?text=No+Image'}
                 alt={item.title}
                 className="article-image"
-                onError={(e) => { e.target.src = 'https://via.placeholder.com/300x200?text=No+Image'; }}
+onError={(e) => {
+  if (e.target.src !== 'https://via.placeholder.com/300x200?text=No+Image') {
+    e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+  }
+}}
               />
               <h3>{item.title || 'Không có tiêu đề'}</h3>
               <p className="article-description">{item.description || 'Không có mô tả'}</p>

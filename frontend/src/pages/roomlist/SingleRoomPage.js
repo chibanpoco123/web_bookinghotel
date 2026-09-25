@@ -25,7 +25,7 @@
     const navigate = useNavigate();
     const isLoggedIn = localStorage.getItem("loggedInUser") ? true: false;
     useEffect(() => {
-      axios.get("http://localhost:5000/api/rooms",{
+      axios.get("https://web-bookinghotel-2.onrender.com/api/rooms",{
         params : {
           type:"phòng đơn",
           subType:selectedType,

@@ -36,7 +36,7 @@ const BookingPage = () => {
 
     const fetchBookedRooms = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/bookings/user/${user.id}`);
+        const res = await axios.get(`https://web-bookinghotel-2.onrender.com/api/bookings/user/${user.id}`);
         console.log("📦 Dữ liệu đặt phòng:", res.data);
         setBookedRooms(res.data);
       } catch (error) {
@@ -54,7 +54,7 @@ const BookingPage = () => {
     if (!isConfirmed) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/bookings/${_id}`);
+      await axios.delete(`https://web-bookinghotel-2.onrender.com/api/bookings/${_id}`);
       const updatedRooms = bookedRooms.filter((room) => room._id !== _id);
       setBookedRooms(updatedRooms);
       setSuccessMessage("✅ Đã huỷ đặt phòng thành công.");

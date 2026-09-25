@@ -12,7 +12,7 @@ const NewsPage = () => {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/news');
+        const res = await axios.get('https://web-bookinghotel-2.onrender.com/api/news');
         console.log('Dữ liệu từ API:', res.data);
 
         // Xử lý dữ liệu trả về từ API

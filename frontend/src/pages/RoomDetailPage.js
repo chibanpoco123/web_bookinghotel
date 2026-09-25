@@ -30,7 +30,7 @@
     useEffect(() => {
       const fetchRoom = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/rooms/${id}`);
+          const response = await fetch(`https://web-bookinghotel-2.onrender.com/api/rooms/${id}`);
           if (!response.ok) throw new Error('Không tìm thấy phòng');
           const data = await response.json();
           setRoom(data);
@@ -77,7 +77,7 @@
     };
 
     try {
-      const res = await fetch('http://localhost:5000/api/bookings', {
+      const res = await fetch('https://web-bookinghotel-2.onrender.com/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

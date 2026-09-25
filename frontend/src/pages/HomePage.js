@@ -35,7 +35,7 @@ const user = getCurrentUser();
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/rooms');
+        const res = await fetch('https://web-bookinghotel-2.onrender.com/api/rooms');
         if (!res.ok) throw new Error('Không thể tải dữ liệu phòng');
         const data = await res.json();
         setRooms(data);
@@ -132,7 +132,7 @@ const renderStars = (rating) => {
 };
 
     try {
-      const res = await fetch(`http://localhost:5000/api/bookings/`, {
+      const res = await fetch(`https://web-bookinghotel-2.onrender.com/api/bookings/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -19,7 +19,7 @@ const handleGoogleLoginSuccess = async (credentialResponse) => {
     const picture = decoded.picture;
 
     // ✅ Kiểm tra tài khoản đã tồn tại
-    const checkRes = await fetch(`http://localhost:5000/api/users/check?email=${email}`);
+    const checkRes = await fetch(`https://web-bookinghotel-2.onrender.com/api/users/check?email=${email}`);
     if (!checkRes.ok) throw new Error("Không thể kiểm tra tài khoản");
 
     const result = await checkRes.json();
@@ -37,7 +37,7 @@ const handleGoogleLoginSuccess = async (credentialResponse) => {
         gender: "Nam"
       };
 
-      const registerRes = await fetch("http://localhost:5000/api/auth/register", {
+      const registerRes = await fetch("https://web-bookinghotel-2.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser)
@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
 
   // ✅ Trường hợp đăng nhập thật qua API
   try {
-    const response = await fetch("http://localhost:5000/api/auth/login", {
+    const response = await fetch("https://web-bookinghotel-2.onrender.com/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

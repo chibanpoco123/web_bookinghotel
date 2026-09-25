@@ -45,7 +45,7 @@
   if (!window.confirm('Bạn có chắc muốn xóa đơn đặt phòng này không?')) return;
 
   try {
-    await axios.delete(`http://localhost:5000/api/bookings/${_id}`);
+    await axios.delete(`https://web-bookinghotel-2.onrender.com/api/bookings/${_id}`);
     setBookings(prev => prev.filter(booking => booking._id !== _id));
     alert('Xóa đơn đặt phòng thành công!');
   } catch (error) {
@@ -56,7 +56,7 @@
 
     const fetchBookings = async () =>{
       try{
-        const res = await axios.get('http://localhost:5000/api/bookings')
+        const res = await axios.get('https://web-bookinghotel-2.onrender.com/api/bookings')
         setBookings(res.data)
         console.log(res.data)
       }catch(error){
@@ -83,7 +83,7 @@ useEffect(() => {
     }, []);
     const fetchUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/users');
+        const res = await axios.get('https://web-bookinghotel-2.onrender.com/api/users');
         setUsers(res.data);
       }catch (error){
         console.error('lỗi khi lấy người dùng',error)
@@ -91,7 +91,7 @@ useEffect(() => {
     }
     const fetchRooms = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/rooms');
+        const res = await axios.get('https://web-bookinghotel-2.onrender.com/api/rooms');
         setRooms(res.data);
       } catch (err) {
         console.error('Lỗi khi lấy danh sách phòng:', err);
@@ -103,7 +103,7 @@ useEffect(() => {
   if (!confirmDelete) return;
 
   try {
-    const response = await axios.delete(`http://localhost:5000/api/users/${_id}`);
+    const response = await axios.delete(`https://web-bookinghotel-2.onrender.com/api/users/${_id}`);
     
     if (response.data?.success) {
       const updatedUsers = users.filter(user => user._id !== _id);
@@ -123,7 +123,7 @@ useEffect(() => {
   e.preventDefault();
 
   try {
-    const response = await axios.post('http://localhost:5000/api/users', newUser);
+    const response = await axios.post('https://web-bookinghotel-2.onrender.com/api/users', newUser);
     setUsers([...users, response.data]); // cập nhật UI
     alert('Thêm người dùng thành công!');
     setNewUser({
@@ -163,7 +163,7 @@ useEffect(() => {
       const confirmDelete = window.confirm('Bạn có chắc muốn xóa phòng này không?');
     if (!confirmDelete) return;
     try {
-      await axios.delete(`http://localhost:5000/api/rooms/${_id}`);
+      await axios.delete(`https://web-bookinghotel-2.onrender.com/api/rooms/${_id}`);
       const updatedRooms = rooms.filter(room => room._id !== _id);
       setRooms(updatedRooms);
     } catch (error) {
@@ -200,7 +200,7 @@ useEffect(() => {
     }
 
     // Gửi formData với multipart/form-data
-    const response = await axios.post('http://localhost:5000/api/rooms', formData, {
+    const response = await axios.post('https://web-bookinghotel-2.onrender.com/api/rooms', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
@@ -237,7 +237,7 @@ useEffect(() => {
     const handleUpdateRoom = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5000/api/rooms/${editingRoom._id}`, editingRoom);
+      const response = await axios.put(`https://web-bookinghotel-2.onrender.com/api/rooms/${editingRoom._id}`, editingRoom);
 
       const updatedRooms = rooms.map(room =>
         room._id === editingRoom._id ? response.data : room
@@ -430,7 +430,7 @@ useEffect(() => {
         key={idx}
         src={
           imgUrl.startsWith('/uploads') || imgUrl.startsWith('\\uploads')
-            ? `http://localhost:5000${imgUrl.replace(/\\/g, '/')}`
+            ? `https://web-bookinghotel-2.onrender.com${imgUrl.replace(/\\/g, '/')}`
             : imgUrl
         }
         alt={`${room.name} - Ảnh ${idx + 1}`}
@@ -446,7 +446,7 @@ useEffect(() => {
     <img
       src={
         room.image.startsWith('/uploads') || room.image.startsWith('\\uploads')
-          ? `http://localhost:5000${room.image.replace(/\\/g, '/')}`
+          ? `https://web-bookinghotel-2.onrender.com${room.image.replace(/\\/g, '/')}`
           : room.image
       }
       alt={room.name}

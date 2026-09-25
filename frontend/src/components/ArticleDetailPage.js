@@ -12,7 +12,7 @@ const ArticleDetailPage = () => {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/news/${id}`);
+                const res = await axios.get(`https://web-bookinghotel-2.onrender.com/api/news/${id}`);
                 console.log("Dữ liệu bài viết:", res.data);
                 setArticle(res.data);
             } catch (err) {

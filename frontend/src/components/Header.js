@@ -28,7 +28,7 @@ useEffect(() => {
   const handleSearch = (searchParams) => {
     const { destination, startDate, endDate, guests, rooms } = searchParams;
 
-    const url = `http://localhost:5000/api/search?destination=${destination}&startDate=${startDate}&endDate=${endDate}&guests=${guests}&rooms=${rooms}`;
+    const url = `https://web-bookinghotel-2.onrender.com/api/search?destination=${destination}&startDate=${startDate}&endDate=${endDate}&guests=${guests}&rooms=${rooms}`;
 
     fetch(url)
       .then((response) => response.json())

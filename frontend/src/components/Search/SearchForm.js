@@ -19,7 +19,7 @@ const SearchForm = () => {
   useEffect(() => {
   const fetchRooms = async () =>{
     try {
-     const res = await axios.get('http://localhost:5000/api/rooms') ;
+     const res = await axios.get('https://web-bookinghotel-2.onrender.com/api/rooms') ;
      setAllRooms(res.data);
     }catch(error){
       console.log('lỗi khi thấy danh sách phòng ',error.message);

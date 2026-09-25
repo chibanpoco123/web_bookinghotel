@@ -26,7 +26,7 @@ const FamilyRoomPage = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/rooms", {
+        const res = await axios.get("https://web-bookinghotel-2.onrender.com/api/rooms", {
           params: {
             type: "phòng gia đình",
             subType: selectedType,

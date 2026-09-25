@@ -53,7 +53,7 @@
       setIsModelVisible(true)
     };
     const handleBooking = () =>{
-      if (!custumerInfor.name || custumerInfor.phone || custumerInfor.email || !paymentMethod){
+      if (!custumerInfor.name || !custumerInfor.phone || !custumerInfor.email || !paymentMethod){
         setErrorMessage('vui lòng điền đầy đủ thông tin trước khi thanh toán ')
         return;
       }
@@ -75,7 +75,7 @@
         bookedRooms = [];
       }
       bookedRooms.push(...selectedRooms);
-      localStorage.setItem("bookedRooms".JSON.stringfy(bookedRooms));
+      localStorage.setItem("bookedRooms".JSON.stringify(bookedRooms));
       setTimeout(() => {
         isHidden(true)
       },3000);

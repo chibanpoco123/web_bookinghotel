@@ -10,7 +10,6 @@ import { checkLogin } from "../util/authUtils";
  */
 const PrivateRoutebooking = ({ children }) => {
     const { isLoggedIn } = checkLogin();
-
     if (!isLoggedIn) {
         // Nếu chưa đăng nhập, chuyển đến trang login
         return <Navigate to="/login" replace />;

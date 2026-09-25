@@ -22,11 +22,11 @@ image: {
   type: {
     type: String,
     enum: ["phòng đơn", "phòng đôi", "phòng gia đình"],
-    required: true
+    required: false
   },
   subType: {
     type: String,
-    required: true,
+    required: false,
     validate: {
       validator: function (value) {
         return allowedSubTypes[this.type]?.includes(value);

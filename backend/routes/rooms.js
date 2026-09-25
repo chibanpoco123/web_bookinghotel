@@ -40,7 +40,14 @@ router.post('/', uploads.array('image', 5), async (req, res) => {
     console.log('>>> FILES:', req.files);
     console.log('>>> BODY:', req.body);
 
-    const imagePaths = req.files.map(file => `/uploads/${file.filename}`);
+    const type = String(req.body.type ?? '').trim();
+    const subType = String(req.body.subType ?? '').trim();
+
+    if (!type || !subType || type === 'undefined' || subType === 'undefined') {
+      return res.status(400).json({ message: 'Vui lòng chọn phân loại và hạng phòng hợp lệ.' });
+    }
+
+    const imagePaths = (req.files || []).map(file => `/uploads/${file.filename}`);
 
     const newRoom = new Room({
       name: req.body.name,
@@ -48,10 +55,10 @@ router.post('/', uploads.array('image', 5), async (req, res) => {
       price: req.body.price,
       rating: req.body.rating,
       reviews: req.body.reviews,
-      type: req.body.type,
-      subType: req.body.subType,
+      type,
+      subType,
       address: req.body.address,
-      image: imagePaths, // <- đúng tên trường schema
+      image: imagePaths,
       isFeatured: req.body.isFeatured === 'true',
       facilities: req.body.facilities || [],
     });

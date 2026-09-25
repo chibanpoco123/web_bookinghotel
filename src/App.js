@@ -21,18 +21,14 @@ const App = () => {
     try {
       const storedUser = localStorage.getItem("loggedInUser");
       const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-
       const role = parsedUser?.role || parsedUser?.user?.role;
-
       console.log("🔍 Role hiện tại:", role);
-
       setIsAdmin(role === "admin");
     } catch (error) {
       console.error("❌ Lỗi khi đọc loggedInUser:", error);
       setIsAdmin(false);
     }
   }, [location.pathname]);
-
   return (
     <div className="App">
       {!shouldHideHeaderFooter && <Header />}
@@ -41,7 +37,6 @@ const App = () => {
     </div>
   );
 };
-
 const AppWrapper = () => (
   <GoogleOAuthProvider clientId="938599028812-97hfcb0h9nrad70vmk3ev8k4hlvr7hri.apps.googleusercontent.com">
     <SearchProvider>

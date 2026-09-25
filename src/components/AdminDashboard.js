@@ -2,6 +2,12 @@
   import { useNavigate } from 'react-router-dom';
   import '../assets/css/AdminDashboard.css';
   import axios from 'axios';
+  const roomSubTypes = {
+    'phòng đơn': ['Standard', 'Luxury'],
+    'phòng đôi': ['Standard', 'Luxury', 'VIP', 'Deluxe'],
+    'phòng gia đình': ['Standard', 'Deluxe', 'President'],
+  };
+
   const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     const [rooms, setRooms] = useState([]);
@@ -20,7 +26,17 @@
       gender: ''
     });
     const [bookings,setBookings] = useState([]);
-    const [newRoom, setNewRoom] = useState({ name: '', description: '', price: '', rating: '', reviews: '', image: '', address: '' });
+    const [newRoom, setNewRoom] = useState({
+      name: '',
+      description: '',
+      price: '',
+      rating: '',
+      reviews: '',
+      image: [],
+      type: '',
+      subType: '',
+      address: ''
+    });
     const [editingRoom, setEditingRoom] = useState(null);
 
     const navigate = useNavigate();
@@ -159,23 +175,29 @@ useEffect(() => {
  const handleAddRoom = async (e) => {
   e.preventDefault();
 
+  const safeType = typeof newRoom.type === 'string' ? newRoom.type.trim() : '';
+  const safeSubType = typeof newRoom.subType === 'string' ? newRoom.subType.trim() : '';
+
+  if (!safeType || !safeSubType || safeType === 'undefined' || safeSubType === 'undefined') {
+    alert('Vui lòng chọn phân loại và hạng phòng hợp lệ.');
+    return;
+  }
+
   try {
     const formData = new FormData();
 
-    // Append dữ liệu chữ (vẫn giữ nguyên như bạn yêu cầu)
     formData.append('name', newRoom.name);
     formData.append('description', newRoom.description);
     formData.append('price', newRoom.price);
     formData.append('rating', newRoom.rating);
     formData.append('reviews', newRoom.reviews);
-    formData.append('type', newRoom.type);
-    formData.append('subType', newRoom.subType);
+    formData.append('type', safeType);
+    formData.append('subType', safeSubType);
     formData.append('address', newRoom.address);
 
-    // Append ảnh nếu có (image là mảng File)
-   for (let i = 0; i < newRoom.image.length; i++) {
-  formData.append('image', newRoom.image[i]); // đúng tên 'images' mà backend multer cần
-} 
+    for (let i = 0; i < newRoom.image.length; i++) {
+      formData.append('image', newRoom.image[i]);
+    }
 
     // Gửi formData với multipart/form-data
     const response = await axios.post('http://localhost:5000/api/rooms', formData, {
@@ -473,6 +495,7 @@ useEffect(() => {
                 />                
                 <label>Phân loại phòng:</label>
 <select
+  required
   value={newRoom.type || ''}
   onChange={e =>
     setNewRoom({
@@ -483,13 +506,14 @@ useEffect(() => {
   }
 >
   <option value="">-- Chọn phân loại phòng --</option>
-  {Array.from(new Set(rooms.map(room => room.type))).map((type, idx) => (
-    <option key={idx} value={type}>{type}</option>
+  {Object.keys(roomSubTypes).map(type => (
+    <option key={type} value={type}>{type}</option>
   ))}
 </select>
 
 <label>Hạng phòng:</label>
 <select
+  required
   value={newRoom.subType || ''}
   onChange={e =>
     setNewRoom({
@@ -500,13 +524,9 @@ useEffect(() => {
   disabled={!newRoom.type} // disable khi chưa chọn loại phòng
 >
   <option value="">-- Chọn hạng phòng --</option>
-  {rooms
-    .filter(room => room.type === newRoom.type)
-    .map(room => room.subType)
-    .filter((subType, index, arr) => arr.indexOf(subType) === index) // lọc trùng
-    .map((subType, idx) => (
-      <option key={idx} value={subType}>{subType}</option>
-    ))}
+  {(roomSubTypes[newRoom.type] || []).map(subType => (
+    <option key={subType} value={subType}>{subType}</option>
+  ))}
 </select>
 
 

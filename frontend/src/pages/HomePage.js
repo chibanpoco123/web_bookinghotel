@@ -18,6 +18,13 @@ const HomePage = () => {
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const formatPrice = (value) => {
+  const price = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
+
+  return Number.isFinite(price)
+    ? `${price.toLocaleString('vi-VN')} ₫`
+    : 'Chưa có giá';
+};
   const getCurrentUser = () => {
   try {
     const stored = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -61,6 +68,26 @@ const user = getCurrentUser();
   const handleRoomDetail = (id) => {
     navigate(`/room/${id}`);
   };
+const getRoomImage = (image) => {
+  const value = Array.isArray(image) ? image[0] : image;
+
+  if (typeof value !== 'string' || !value.trim()) {
+    return '/default-image.jpg';
+  }
+
+  const path = value.trim().replace(/\\/g, '/');
+
+  // Ảnh đã có URL đầy đủ
+  if (/^https?:\/\//i.test(path)) return path;
+
+  // Chuẩn hóa uploads/... hoặc /uploads/...
+  const uploadsIndex = path.toLowerCase().indexOf('uploads/');
+  if (uploadsIndex !== -1) {
+    return `https://web-bookinghotel-2.onrender.com/${path.slice(uploadsIndex)}`;
+  }
+
+  return path;
+};
 const topRooms = [...rooms].filter(room => typeof room.reviews === 'number').sort((a,b) => b.reviews - a.reviews).slice(0,4)
 const renderStars = (rating) => {
   const safeRating = Number(rating);
@@ -173,11 +200,11 @@ const renderStars = (rating) => {
                 key={room._id}
                 onDoubleClick={() => handleRoomDetail(room._id)}
               >
-                <img src={room.image} alt={`Room ${room.name}`} />
+                <img src={getRoomImage(room.image)} alt={`Room ${room.name}`} />
                 <h3>{room.name}</h3>
                 <p>{room.address}</p>
                 <p className="price">
-                  <strong>Giá từ: {room.price}/đêm</strong>
+                  <strong>Giá từ: {formatPrice(room.price)}/đêm</strong>
                 </p>
                 <div className="rating">
                   {renderStars(room.rating)}
@@ -201,11 +228,11 @@ const renderStars = (rating) => {
                 key={room._id}
 onClick={() => handleRoomDetail(room._id)}
               >
-                <img src={room.image} alt={`Room ${room.name}`} />
+                <img src={getRoomImage(room.image)} alt={`Room ${room.name}`} />
                 <h3>{room.name}</h3>
                 <p>{room.address}</p>
                 <p className="price">
-                  <strong>Giá từ: {room.price}/đêm</strong>
+                  <strong>Giá từ: {formatPrice(room.price)}/đêm</strong>
                 </p>
                 <div className="rating">
                   {renderStars(room.rating)}
@@ -229,7 +256,7 @@ onClick={() => handleRoomDetail(room._id)}
               <img src={selectedRoom.image} alt={selectedRoom.name} />
               <div className="product-details">
                 <h3>{selectedRoom.name}</h3>
-                <p>Giá: {selectedRoom.price} VND/đêm</p>
+                <p>Giá: {formatPrice(selectedRoom.price)}/đêm</p>
                 <div className="quantity">
                   <button onClick={() => handleQuantityChange(-1)}>-</button>
                   <span>{orderInfo.quantity}</span>
@@ -237,7 +264,7 @@ onClick={() => handleRoomDetail(room._id)}
                 </div>
                 <div className="total-price">
                   <strong>
-                    Tổng giá: {calculateTotalPrice().toLocaleString()} VND
+Tổng giá: {formatPrice(calculateTotalPrice())}
                   </strong>
                 </div>
               </div>

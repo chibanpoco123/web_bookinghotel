@@ -104,7 +104,7 @@
               <div className="room-card" key={index}
               onDoubleClick={() => handleRoomDetail(room._id)}>
                 <img src={room.image} alt={room.name} />
-                <h2>{room.name}</h2>
+                <h2 style={{ textAlign: 'center' }}>{room.name}</h2>
                 <p>{room.address}</p>
                 <p className="price">Giá từ: {room.price}</p>
                 <p>{room.rating} ⭐ ({room.reviews} đánh giá)</p>

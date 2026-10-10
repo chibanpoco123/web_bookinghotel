@@ -200,7 +200,16 @@ const renderStars = (rating) => {
                 key={room._id}
                 onDoubleClick={() => handleRoomDetail(room._id)}
               >
-                <img src={getRoomImage(room.image)} alt={`Room ${room.name}`} />
+<div className="room-image">
+  <img
+    src={getRoomImage(room.image)}
+    alt={room.name}
+    onError={(e) => {
+      e.currentTarget.style.display = 'none';
+      e.currentTarget.parentElement.classList.add('image-error');
+    }}
+  />
+</div>
                 <h3>{room.name}</h3>
                 <p>{room.address}</p>
                 <p className="price">
@@ -228,8 +237,16 @@ const renderStars = (rating) => {
                 key={room._id}
 onClick={() => handleRoomDetail(room._id)}
               >
-                <img src={getRoomImage(room.image)} alt={`Room ${room.name}`} />
-                <h3>{room.name}</h3>
+<div className="room-image">
+  <img
+    src={getRoomImage(room.image)}
+    alt={room.name}
+    onError={(e) => {
+      e.currentTarget.style.display = 'none';
+      e.currentTarget.parentElement.classList.add('image-error');
+    }}
+  />
+</div>                <h3>{room.name}</h3>
                 <p>{room.address}</p>
                 <p className="price">
                   <strong>Giá từ: {formatPrice(room.price)}/đêm</strong>

@@ -25,7 +25,22 @@
     const [errorMessage, setErrorMessage] = useState("");
     const [isBookingConfirmed, setIsBookingConfirmed] = useState(false);
     const [isHidden, setIsHidden] = useState(false);
+    const getRoomImage = (image) => {
+  const value = Array.isArray(image) ? image[0] : image;
 
+  if (typeof value !== 'string' || !value.trim()) return '';
+
+  const path = value.trim().replace(/\\/g, '/');
+
+  if (/^https?:\/\//i.test(path)) return path;
+
+  const uploadsIndex = path.toLowerCase().indexOf('uploads/');
+  if (uploadsIndex !== -1) {
+    return `https://web-bookinghotel-2.onrender.com/${path.slice(uploadsIndex)}`;
+  }
+
+  return path;
+};
     // Gọi API khi component mount
     useEffect(() => {
       const fetchRoom = async () => {
@@ -123,8 +138,11 @@
 
         <div className="room-detail-body">
           <div className="room-image-gallery">
-            <img className="main-room-image" src={room.image} alt={room.name} />
-            <div className="image-thumbnails">
+<img
+  className="main-room-image"
+  src={getRoomImage(room.image)}
+  alt={room.name}
+/>            <div className="image-thumbnails">
               {room.imageGallery?.map((img, idx) => (
                 <img key={idx} className="thumbnail-image" src={img} alt={`Thumbnail ${idx + 1}`} />
               ))}

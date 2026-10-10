@@ -1,76 +1,78 @@
 /* Căn chỉnh tổng thể */
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  font-family: Arial, sans-serif;
   background-color: #f4f4f4;
 }
 
 .homepage {
+  width: 100%;
   padding: 20px;
 }
 
-
-
 /* Banner */
 .banner img {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
 }
 
-/* Search Container */
-.search-container {  
-  background-color: #f8f9fa;  
-  border-radius: 8px;  
-  padding: 20px;  
-  margin-bottom: 20px;  
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
-}  
-
-.search-container h2 {  
-  font-size: 24px;  
-  margin-bottom: 15px;  
-  color: #333;  
-  text-align: left;  
-}  
-
-.result-container {  
-  display: flex;  
-  flex-wrap: wrap;  
-}  
-
-.result-card:hover {  
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);  
-}  
-
-.result-card {  
-  display: flex;  
-  align-items: center;  
-  background-color: #fff;  
-  border: 1px solid #eee;  
-  border-radius: 5px;  
-  margin: 10px;  
-  width: calc(30% - 20px);  
-  text-align: left;  
-  transition: box-shadow 0.3s;  
-}  
-
-.result-img {  
-  width: 150px;  
-  height: 150px;  
-  object-fit: cover;  
-  border-top-left-radius: 5px;  
-  border-top-right-radius: 5px;  
-  margin-right: 10px;  
-  margin-left: 10px; 
-}  
-
-.result-details {  
-  padding: 10px;  
-  flex: 1;  
+/* Tìm kiếm */
+.search-container {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.search-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 24px;
+  text-align: left;
+}
+
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.result-card {
+  display: flex;
+  align-items: center;
+  width: calc(30% - 20px);
+  margin: 10px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  text-align: left;
+  transition: box-shadow 0.3s;
+}
+
+.result-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.result-img {
+  width: 150px;
+  height: 150px;
+  margin: 0 10px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.result-details {
+  flex: 1;
+  padding: 10px;
+}
+
+/* Danh mục */
 .categories {
   margin: 20px 0;
 }
@@ -78,6 +80,7 @@ body {
 .category-container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .category {
@@ -98,11 +101,11 @@ body {
 
 .category button {
   margin-top: 10px;
-  background-color: #28a745;
-  color: white;
   padding: 10px 20px;
+  color: #fff;
+  background-color: #28a745;
+  border: 0;
   border-radius: 5px;
-  border: none;
   cursor: pointer;
 }
 
@@ -110,30 +113,90 @@ body {
   background-color: #218838;
 }
 
-/* Phòng khách sạn */
+/* Danh sách phòng */
+.promotion {
+  display: block !important;
+  width: 100%;
+}
+
 .hotel-list {
-  margin: 20px 0;
+  display: block !important;
+  width: 100%;
+  margin: 24px 0 40px;
+}
+
+.hotel-list > h3 {
+  display: block;
+  width: 100%;
+  margin: 0 0 20px;
+  color: #222;
+  font-size: 28px;
 }
 
 .hotel-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  justify-content: start;
+  align-items: stretch;
+  gap: 24px;
 }
 
 .hotel-item {
-  background-color: white;
+  display: flex;
+  min-width: 0;
+  min-height: 440px;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+  background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   text-align: left;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.hotel-item img {
+/* Ảnh đặt trực tiếp trong thẻ, nếu có */
+.hotel-item > img {
+  display: block;
   width: 100%;
-  height: 300px;
+  height: 220px;
+  margin-bottom: 14px;
+  object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 15px;
+}
+
+/* Khung ảnh phòng */
+.hotel-item .room-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 220px;
+  min-height: 220px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  background-color: #f1f3f5;
+  border-radius: 10px;
+}
+
+.hotel-item .room-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
+}
+
+.hotel-item .room-image.image-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hotel-item .room-image.image-error::after {
+  content: "Ảnh phòng chưa tải được";
+  color: #777;
+  font-size: 14px;
+  text-align: center;
 }
 
 .hotel-item h3 {
@@ -143,16 +206,16 @@ body {
 }
 
 .hotel-item p {
-  font-size: 14px;
   margin: 5px 0;
+  font-size: 14px;
 }
 
 .hotel-item .price {
-  font-weight: bold;
-  font-size: 20px;
-  font-family: 'Playfair Display', serif;
-  color: #0a58ca;
   margin: 10px 0;
+  color: #0a58ca;
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .rating {
@@ -167,36 +230,33 @@ body {
 }
 
 .hotel-item button {
-  margin-top: 15px;
-  background-color: #0a58ca;
-  color: white;
-  border: none;
+  display: block;
+  margin-top: auto;
+  margin-left: auto;
   padding: 10px 20px;
+  color: #fff;
+  background-color: #0a58ca;
+  border: 0;
   border-radius: 5px;
   cursor: pointer;
-  display: block;
-  margin-left: auto;
 }
 
 .hotel-item button:hover {
   background-color: #0056b3;
 }
 
-
-
-
-/* Modal Styles */
+/* Cửa sổ đặt phòng */
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
+  display: flex;
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -208,15 +268,17 @@ body {
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  display: flex;
   width: 500px;
   max-width: 90%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
+  max-height: 90vh;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .product-info {
@@ -226,9 +288,10 @@ body {
 }
 
 .product-info img {
-  max-width: 200px;
+  width: 200px;
   max-height: 150px;
   margin-right: 20px;
+  object-fit: cover;
 }
 
 .product-details {
@@ -242,34 +305,44 @@ body {
 }
 
 .quantity button {
-  padding: 5px 10px;
   margin: 0 10px;
+  padding: 5px 10px;
 }
 
 .total-price {
-  color: red;
-  font-weight: bold;
-  font-size: 1.2rem;
   margin-top: 20px;
+  color: red;
+  font-size: 1.2rem;
+  font-weight: bold;
   text-align: center;
 }
 
-/* Customer Information Inputs */
+/* Thông tin khách hàng */
+.customer-info {
+  width: 100%;
+}
+
 .customer-info input,
 .customer-info select {
   width: 100%;
-  padding: 8px;
   margin: 5px 0;
-  border-radius: 4px;
+  padding: 8px;
   border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Button Styles */
+.error-message {
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+}
+
+/* Nút chung */
 button {
   padding: 8px 16px;
+  color: #fff;
   background-color: #007bff;
-  color: white;
-  border: none;
+  border: 0;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -278,35 +351,54 @@ button:hover {
   background-color: #0056b3;
 }
 
-.error-message {
-  color: red;
-  margin-top: 10px;
-  font-size: 14px;
-}
-.room-image {
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-  border-radius: 10px;
-  background: #f1f3f5;
+/* Responsive */
+@media (max-width: 900px) {
+  .hotel-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
 }
 
-.room-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+@media (max-width: 600px) {
+  .homepage {
+    padding: 12px;
+  }
 
-.room-image.image-error {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .hotel-list > h3 {
+    font-size: 23px;
+  }
 
-.room-image.image-error::after {
-  content: "Ảnh phòng chưa tải được";
-  color: #777;
-  font-size: 14px;
-}
+  .hotel-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
+  .hotel-item {
+    min-height: 0;
+  }
+
+  .hotel-item .room-image {
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .result-card {
+    width: 100%;
+  }
+
+  .category-container {
+    flex-direction: column;
+  }
+
+  .category {
+    width: 100%;
+  }
+
+  .product-info {
+    flex-direction: column;
+  }
+
+  .product-info img {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}

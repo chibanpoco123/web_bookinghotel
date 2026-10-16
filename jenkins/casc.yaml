@@ -1,0 +1,14 @@
+jenkins:
+  systemMessage: "Hotel booking project CI"
+
+tool:
+  nodejs:
+    installations:
+      - name: "NodeJS 20"
+        properties:
+          - installSource:
+              installers:
+                - nodeJSInstaller:
+                    id: "20.19.0"
+                    npmPackages: ""
+                    npmPackagesRefreshHours: 72

@@ -25,6 +25,21 @@ commits independently of Jenkins. If deployments must wait for Jenkins to
 pass, disable Render Auto-Deploy and configure a protected Render deploy hook
 as a Jenkins credential, then add a deploy stage to the pipeline.
 
+### Run Jenkins with this project
+
+From the project root, start the local Jenkins container:
+
+```bash
+docker compose up -d --build
+```
+
+Open `http://localhost:8080`, finish Jenkins' first-time setup, then create a
+Pipeline job using **Pipeline script from SCM** and this repository's Git URL.
+Choose branch `*/main` and script path `Jenkinsfile`. The local Jenkins image
+already includes the required plugins and Node.js 20 tool configuration.
+Check container startup with `docker compose logs -f jenkins`; stop it with
+`docker compose down` (the Jenkins data volume is retained).
+
 ## Mô tả
 Đây là một dự án frontend sử dụng React.js để xây dựng giao diện người dùng. 
 Dự án được thiết kế để hiển thị đề tài đặt phòng khách sạn

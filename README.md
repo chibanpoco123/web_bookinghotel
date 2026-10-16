@@ -1,5 +1,30 @@
 # Frontend Project : KING OF WIBU
 
+## Jenkins CI
+
+The root `Jenkinsfile` defines the CI pipeline for this repository. It installs
+the backend and frontend dependencies, checks the backend entry point syntax,
+runs the frontend tests, and builds the frontend. A failed stage stops the
+pipeline.
+
+### Jenkins setup
+
+1. Install Jenkins with the **Pipeline** and **NodeJS** plugins.
+2. In **Manage Jenkins → Tools**, add a NodeJS installation named `NodeJS 20`
+   and select Node.js 20.x. The installation name must match the `Jenkinsfile`.
+3. Create a **Pipeline** job. Under **Pipeline**, choose **Pipeline script from
+   SCM**, select **Git**, enter this repository URL, and set the branch to
+   `*/main`. Set the script path to `Jenkinsfile`.
+4. Save and run **Build Now**. To run it on each GitHub push, configure a
+   GitHub webhook pointing to `https://<your-public-jenkins-url>/github-webhook/`
+   and enable the GitHub hook trigger in the job's build triggers. Jenkins must
+   be reachable by GitHub for webhooks to work.
+
+Render can remain connected to GitHub with Auto-Deploy enabled; it will deploy
+commits independently of Jenkins. If deployments must wait for Jenkins to
+pass, disable Render Auto-Deploy and configure a protected Render deploy hook
+as a Jenkins credential, then add a deploy stage to the pipeline.
+
 ## Mô tả
 Đây là một dự án frontend sử dụng React.js để xây dựng giao diện người dùng. 
 Dự án được thiết kế để hiển thị đề tài đặt phòng khách sạn

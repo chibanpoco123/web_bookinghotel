@@ -148,6 +148,26 @@ body {
   form button:hover {
     background-color: #218838;
   }
+
+.room-facility-options {
+  margin: 12px 0 20px;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.room-facility-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 14px 6px 0;
+  font-weight: normal;
+}
+
+.room-facility-options input[type='checkbox'] {
+  margin: 0;
+  padding: 0;
+}
   
   /* Phần thông tin phòng */
 /* Phần thông tin phòng */

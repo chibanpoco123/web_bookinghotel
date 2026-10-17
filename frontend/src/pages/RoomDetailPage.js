@@ -7,6 +7,19 @@
     FaSmokingBan, FaLeaf, FaRegLightbulb
   } from 'react-icons/fa';
 
+  const facilityIcons = {
+    FaWifi,
+    FaSwimmer,
+    FaBed,
+    FaShower,
+    FaCar,
+    FaTv,
+    FaCogs,
+    FaSmokingBan,
+    FaLeaf,
+    FaRegLightbulb,
+  };
+
   const RoomDetailPage = () => {
     const { id } = useParams();
     const [room, setRoom] = useState(null);
@@ -157,24 +170,36 @@
             <div className="room-amenities">
               <h3>Tiện ích phòng</h3>
               <div className="amenity-icons">
-                <div className="amenity-item"><FaWifi /><p>Wi-Fi miễn phí</p></div>
-                <div className="amenity-item"><FaSwimmer /><p>Bể bơi</p></div>
-                <div className="amenity-item"><FaBed /><p>Giường đôi</p></div>
-                <div className="amenity-item"><FaShower /><p>Phòng tắm riêng</p></div>
-                <div className="amenity-item"><FaCar /><p>Chỗ đậu xe</p></div>
-                <div className="amenity-item"><FaTv /><p>TV màn hình phẳng</p></div>
-                <div className="amenity-item"><FaCogs /><p>Dịch vụ 24/7</p></div>
-                <div className="amenity-item"><FaSmokingBan /><p>Không hút thuốc</p></div>
-                <div className="amenity-item"><FaLeaf /><p>Không gian xanh</p></div>
+                {(room.facilities || []).filter(facility => facility.type === 'amenity' || facility.type === 'amenty').map(facility => {
+                  const Icon = facilityIcons[facility.icon] || FaRegLightbulb;
+                  return (
+                    <div className="amenity-item" key={facility._id || facility.key}>
+                      <Icon />
+                      <p>{facility.label || facility.lable}</p>
+                    </div>
+                  );
+                })}
+                {!(room.facilities || []).some(facility => facility.type === 'amenity' || facility.type === 'amenty') && (
+                  <p>Phòng này chưa có tiện ích được cập nhật.</p>
+                )}
               </div>
             </div>
 
             <div className="room-rules">
               <h3>Quy định phòng</h3>
               <div className="rule-icons">
-                <div className="rule-item"><FaSmokingBan /><p>Không hút thuốc</p></div>
-                <div className="rule-item"><FaCar /><p>Không thú cưng</p></div>
-                <div className="rule-item"><FaRegLightbulb /><p>Giới hạn: 2 người</p></div>
+                {(room.facilities || []).filter(facility => facility.type === 'rule').map(facility => {
+                  const Icon = facilityIcons[facility.icon] || FaRegLightbulb;
+                  return (
+                    <div className="rule-item" key={facility._id || facility.key}>
+                      <Icon />
+                      <p>{facility.label || facility.lable}</p>
+                    </div>
+                  );
+                })}
+                {!(room.facilities || []).some(facility => facility.type === 'rule') && (
+                  <p>Chưa có quy định phòng được cập nhật.</p>
+                )}
               </div>
             </div>
 

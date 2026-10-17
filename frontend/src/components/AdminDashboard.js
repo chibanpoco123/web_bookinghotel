@@ -7,10 +7,19 @@
     'phòng đôi': ['Standard', 'Luxury', 'VIP', 'Deluxe'],
     'phòng gia đình': ['Standard', 'Deluxe', 'President'],
   };
+  const toFacilityKey = value => value
+    .toLowerCase()
+    .replace(/đ/g, 'd')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
 
   const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     const [rooms, setRooms] = useState([]);
+    const [facilities, setFacilities] = useState([]);
+    const [newFacility, setNewFacility] = useState({ type: 'amenity', key: '', label: '', icon: 'FaRegLightbulb' });
    const [images, setImages] = useState([]);
     const [imagePreviews, setImagePreviews] = useState([]);
 
@@ -35,7 +44,8 @@
       image: [],
       type: '',
       subType: '',
-      address: ''
+      address: '',
+      facilities: [],
     });
     const [editingRoom, setEditingRoom] = useState(null);
 
@@ -79,6 +89,7 @@ useEffect(() => {
       fetchUsers();
       fetchRooms();
       fetchBookings();
+      fetchFacilities();
 
     }, []);
     const fetchUsers = async () => {
@@ -97,6 +108,47 @@ useEffect(() => {
         console.error('Lỗi khi lấy danh sách phòng:', err);
       }
     };
+
+    const fetchFacilities = async () => {
+      try {
+        const response = await axios.get('https://web-bookinghotel-2.onrender.com/api/facilities');
+        setFacilities(response.data);
+      } catch (error) {
+        console.error('Lỗi khi lấy danh sách tiện ích:', error);
+      }
+    };
+
+    const handleAddFacility = async (e) => {
+      e.preventDefault();
+      try {
+        const response = await axios.post('https://web-bookinghotel-2.onrender.com/api/facilities', newFacility);
+        setFacilities(previous => [...previous, response.data]);
+        setNewFacility({ type: 'amenity', key: '', label: '', icon: 'FaRegLightbulb' });
+        alert('Thêm tiện ích thành công!');
+      } catch (error) {
+        alert(error.response?.data?.message || 'Thêm tiện ích thất bại.');
+      }
+    };
+
+    const handleDeleteFacility = async (facilityId) => {
+      if (!window.confirm('Xóa tiện ích này khỏi hệ thống và các phòng đang dùng?')) return;
+      try {
+        await axios.delete(`https://web-bookinghotel-2.onrender.com/api/facilities/${facilityId}`);
+        setFacilities(previous => previous.filter(facility => facility._id !== facilityId));
+        setRooms(previous => previous.map(room => ({
+          ...room,
+          facilities: (room.facilities || []).filter(facility => (facility._id || facility) !== facilityId),
+        })));
+      } catch (error) {
+        alert(error.response?.data?.message || 'Xóa tiện ích thất bại.');
+      }
+    };
+
+    const toggleRoomFacility = (current, facilityId) => (
+      current.includes(facilityId)
+        ? current.filter(id => id !== facilityId)
+        : [...current, facilityId]
+    );
 
     const handleDeleteUser = async (_id) => {
   const confirmDelete = window.confirm('Bạn có chắc muốn xóa người dùng này không?');
@@ -194,6 +246,7 @@ useEffect(() => {
     formData.append('type', safeType);
     formData.append('subType', safeSubType);
     formData.append('address', newRoom.address);
+    formData.append('facilities', JSON.stringify(newRoom.facilities));
 
     for (let i = 0; i < newRoom.image.length; i++) {
       formData.append('image', newRoom.image[i]);
@@ -218,7 +271,8 @@ useEffect(() => {
       image: [],
       type: '',
       subType: '',
-      address: ''
+      address: '',
+      facilities: [],
     });
 
     alert('Thêm phòng thành công!');
@@ -231,13 +285,16 @@ useEffect(() => {
 
 
     const handleEditRoom = (room) => {
-      setEditingRoom(room);
+      setEditingRoom({ ...room, facilities: (room.facilities || []).map(facility => facility._id || facility) });
       setActiveSection('editRoom');
     };
     const handleUpdateRoom = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://web-bookinghotel-2.onrender.com/api/rooms/${editingRoom._id}`, editingRoom);
+      const response = await axios.put(`https://web-bookinghotel-2.onrender.com/api/rooms/${editingRoom._id}`, {
+        ...editingRoom,
+        facilities: editingRoom.facilities || [],
+      });
 
       const updatedRooms = rooms.map(room =>
         room._id === editingRoom._id ? response.data : room
@@ -269,7 +326,7 @@ useEffect(() => {
           <button onClick={() => setActiveSection('rooms')}>Quản lý phòng</button>
           <button onClick={() => setActiveSection('addRoom')}>Thêm phòng</button>
           <button onClick={() => setActiveSection('bookings')}>Danh sách đặt phòng</button>
-          <button onClick={() => setActiveSection('')}>Thêm phòng</button>
+          <button onClick={() => setActiveSection('facilities')}>Quản lý tiện ích</button>
 
           <button onClick={handleLogout}>Đăng xuất</button>
         </div>
@@ -319,6 +376,48 @@ useEffect(() => {
     )}
   </section>
 )}
+
+          {activeSection === 'facilities' && (
+            <section className="facility-management">
+              <h2>Quản lý tiện ích và quy định</h2>
+              <form onSubmit={handleAddFacility}>
+                <label>Tên hiển thị:</label>
+                <input
+                  required
+                  value={newFacility.label}
+                  onChange={e => setNewFacility({ ...newFacility, label: e.target.value, key: toFacilityKey(e.target.value.trim()) })}
+                  placeholder="Ví dụ: Wi-Fi miễn phí"
+                />
+                <label>Mã tiện ích:</label>
+                <input
+                  required
+                  value={newFacility.key}
+                  onChange={e => setNewFacility({ ...newFacility, key: e.target.value })}
+                  placeholder="wifi-mien-phi"
+                />
+                <label>Loại:</label>
+                <select value={newFacility.type} onChange={e => setNewFacility({ ...newFacility, type: e.target.value })}>
+                  <option value="amenity">Tiện ích</option>
+                  <option value="rule">Quy định</option>
+                </select>
+                <label>Biểu tượng:</label>
+                <select value={newFacility.icon} onChange={e => setNewFacility({ ...newFacility, icon: e.target.value })}>
+                  {['FaRegLightbulb', 'FaWifi', 'FaSwimmer', 'FaBed', 'FaShower', 'FaCar', 'FaTv', 'FaCogs', 'FaSmokingBan', 'FaLeaf'].map(icon => (
+                    <option key={icon} value={icon}>{icon}</option>
+                  ))}
+                </select>
+                <button type="submit">Thêm tiện ích</button>
+              </form>
+              <ul>
+                {facilities.map(facility => (
+                  <li key={facility._id}>
+                    <strong>{facility.label || facility.lable}</strong> — {facility.type === 'rule' ? 'Quy định' : 'Tiện ích'} ({facility.key})
+                    <button type="button" onClick={() => handleDeleteFacility(facility._id)}>Xóa</button>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
           {activeSection === 'addUser' && (
             <section className="add-user">
@@ -468,6 +567,7 @@ useEffect(() => {
                         <p>Đánh giá: {room.rating}</p>
                         <p>Số lượt đánh giá: {room.reviews}</p>
                         <p>Địa chỉ: {room.address}</p>
+                        <p><strong>Tiện ích:</strong> {(room.facilities || []).map(facility => facility.label || facility.lable).filter(Boolean).join(', ') || 'Chưa có'}</p>
                       </div>
                     </div>
                     <button onClick={() => handleEditRoom(room)}>Sửa phòng</button>
@@ -563,6 +663,20 @@ useEffect(() => {
                   value={newRoom.address}
                   onChange={e => setNewRoom({ ...newRoom, address: e.target.value })}
                 />
+                <fieldset className="room-facility-options">
+                  <legend>Tiện ích và quy định của phòng</legend>
+                  {facilities.map(facility => (
+                    <label key={facility._id}>
+                      <input
+                        type="checkbox"
+                        checked={newRoom.facilities.includes(facility._id)}
+                        onChange={() => setNewRoom({ ...newRoom, facilities: toggleRoomFacility(newRoom.facilities, facility._id) })}
+                      />
+                      {facility.label || facility.lable}
+                    </label>
+                  ))}
+                  {facilities.length === 0 && <p>Hãy thêm tiện ích trước trong mục Quản lý tiện ích.</p>}
+                </fieldset>
                 <button type="submit">Thêm phòng</button>
               </form>
             </section>
@@ -583,6 +697,19 @@ useEffect(() => {
                   value={editingRoom.description}
                   onChange={e => setEditingRoom({ ...editingRoom, description: e.target.value })}
                 />
+                <fieldset className="room-facility-options">
+                  <legend>Tiện ích và quy định của phòng</legend>
+                  {facilities.map(facility => (
+                    <label key={facility._id}>
+                      <input
+                        type="checkbox"
+                        checked={(editingRoom.facilities || []).includes(facility._id)}
+                        onChange={() => setEditingRoom({ ...editingRoom, facilities: toggleRoomFacility(editingRoom.facilities || [], facility._id) })}
+                      />
+                      {facility.label || facility.lable}
+                    </label>
+                  ))}
+                </fieldset>
                 <label>Giá:</label>
                 <input
                   type="number"

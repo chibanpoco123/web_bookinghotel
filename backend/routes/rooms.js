@@ -4,6 +4,18 @@ const router = express.Router();
 const Room = require('../models/Room');
 const Booking = require('../models/Booking')
 const uploads = require('../middleware/uploads')
+
+const parseFacilities = value => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.map(item => item?._id || item).filter(Boolean);
+  if (typeof value !== 'string') return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? parsed.map(item => item?._id || item).filter(Boolean) : [];
+  } catch {
+    return [value];
+  }
+};
 //GET lấy chi tiết phòng Id
 router.get('/:id', async (req, res) => {
   try {
@@ -26,7 +38,7 @@ router.get('/', async (req, res) => {
     if (type) filter.type = type;
     if (subType) filter.subType = subType;
 
-    const rooms = await Room.find(filter);
+    const rooms = await Room.find(filter).populate('facilities');
     res.json(rooms);
   } catch (err) {
     res.status(500).json({ message: 'Lỗi khi lấy danh sách phòng', error: err.message });
@@ -60,10 +72,11 @@ router.post('/', uploads.array('image', 5), async (req, res) => {
       address: req.body.address,
       image: imagePaths,
       isFeatured: req.body.isFeatured === 'true',
-      facilities: req.body.facilities || [],
+      facilities: parseFacilities(req.body.facilities),
     });
 
     const savedRoom = await newRoom.save();
+    await savedRoom.populate('facilities');
     res.status(201).json(savedRoom);
   } catch (error) {
     console.error('Lỗi thêm phòng:', error);
@@ -75,7 +88,12 @@ router.post('/', uploads.array('image', 5), async (req, res) => {
 // PUT: Cập nhật phòng theo ID
 router.put('/:id', async (req, res) => {
   try {
-    const updatedRoom = await Room.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate('facilities');
+    const update = { ...req.body };
+    if (Object.prototype.hasOwnProperty.call(update, 'facilities')) {
+      update.facilities = parseFacilities(update.facilities);
+    }
+    const updatedRoom = await Room.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true }).populate('facilities');
+    if (!updatedRoom) return res.status(404).json({ message: 'Không tìm thấy phòng.' });
     res.json(updatedRoom);
   } catch (err) {
     res.status(400).json({ message: 'Lỗi khi cập nhật phòng', error: err.message });

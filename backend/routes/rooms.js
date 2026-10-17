@@ -5,6 +5,25 @@ const Room = require('../models/Room');
 const Booking = require('../models/Booking')
 const uploads = require('../middleware/uploads')
 
+const parseAmenities = value => {
+  if (Array.isArray(value)) {
+    return [...new Set(value.map(item => String(item).trim()).filter(Boolean))];
+  }
+
+  if (!value) return [];
+
+  try {
+    const parsed = JSON.parse(value);
+    if (Array.isArray(parsed)) {
+      return [...new Set(parsed.map(item => String(item).trim()).filter(Boolean))];
+    }
+  } catch {
+    // Accept a comma-separated string from form submissions.
+  }
+
+  return [...new Set(String(value).split(',').map(item => item.trim()).filter(Boolean))];
+};
+
 const parseFacilities = value => {
   if (!value) return [];
   if (Array.isArray(value)) return value.map(item => item?._id || item).filter(Boolean);
@@ -73,6 +92,7 @@ router.post('/', uploads.array('image', 5), async (req, res) => {
       image: imagePaths,
       isFeatured: req.body.isFeatured === 'true',
       facilities: parseFacilities(req.body.facilities),
+      amenities: parseAmenities(req.body.amenities),
     });
 
     const savedRoom = await newRoom.save();
@@ -91,6 +111,9 @@ router.put('/:id', async (req, res) => {
     const update = { ...req.body };
     if (Object.prototype.hasOwnProperty.call(update, 'facilities')) {
       update.facilities = parseFacilities(update.facilities);
+    }
+    if (Object.prototype.hasOwnProperty.call(update, 'amenities')) {
+      update.amenities = parseAmenities(update.amenities);
     }
     const updatedRoom = await Room.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true }).populate('facilities');
     if (!updatedRoom) return res.status(404).json({ message: 'Không tìm thấy phòng.' });

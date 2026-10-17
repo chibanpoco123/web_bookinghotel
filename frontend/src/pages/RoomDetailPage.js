@@ -170,16 +170,13 @@
             <div className="room-amenities">
               <h3>Tiện ích phòng</h3>
               <div className="amenity-icons">
-                {(room.facilities || []).filter(facility => facility.type === 'amenity' || facility.type === 'amenty').map(facility => {
-                  const Icon = facilityIcons[facility.icon] || FaRegLightbulb;
-                  return (
-                    <div className="amenity-item" key={facility._id || facility.key}>
-                      <Icon />
-                      <p>{facility.label || facility.lable}</p>
-                    </div>
-                  );
-                })}
-                {!(room.facilities || []).some(facility => facility.type === 'amenity' || facility.type === 'amenty') && (
+                {(room.amenities || []).map((amenity, index) => (
+                  <div className="amenity-item" key={`${amenity}-${index}`}>
+                    <FaRegLightbulb />
+                    <p>{amenity}</p>
+                  </div>
+                ))}
+                {!(room.amenities || []).length && (
                   <p>Phòng này chưa có tiện ích được cập nhật.</p>
                 )}
               </div>

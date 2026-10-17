@@ -42,6 +42,10 @@ const roomSchema = new mongoose.Schema(
         ref: 'Facility',
       },
     ],
+    amenities: {
+      type: [String],
+      default: [],
+    },
   },
   {
     toJSON: { virtuals: true },
